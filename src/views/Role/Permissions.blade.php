@@ -51,21 +51,46 @@
 <script src="https://unpkg.com/vue3-toastify/dist/index.js"></script>
 
 <script>
-    axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    // Retrieve the CSRF token once and store it in a variable
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     function togglePermission(permissionId, checked) {
-        axios.post('/api/permissions/assign-or-remove', {
+        // Show loading spinner or similar if needed
+
+        // Prepare data to be sent
+        const requestData = {
             role_id: {{ $role->id }},
             permission_id: permissionId,
-            assign: checked,
+            assign: checked
+        };
+
+        // Perform the fetch request
+        fetch('/api/permissions/assign-or-remove', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken
+            },
+            body: JSON.stringify(requestData)
         })
-        .then(function (response) {
-            if (response.data.status === 'assigned' || response.data.status === 'removed') {
-                Vue3Toastify.success(response.data.message);
+        .then(response => {
+            // Check if the response is successful
+            if (!response.ok) {
+                throw new Error(`Error: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Handle response data
+            if (data.status === 'assigned' || data.status === 'removed') {
+                Vue3Toastify.success(data.message); // Display success toast
+            } else {
+                Vue3Toastify.error("Unexpected response status.");
             }
         })
-        .catch(function (error) {
-            console.error(error.response.data);
+        .catch(error => {
+            // Handle errors
+            console.error('Error:', error);
             Vue3Toastify.error("An error occurred while updating permission.");
         });
     }

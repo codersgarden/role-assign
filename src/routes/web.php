@@ -44,5 +44,5 @@ Route::prefix('/permissions')->group(function () {
 
 // -----------------------Assigning Permissions and Removing Permissions Routes-API Start-----------------------
 Route::prefix('/api')->group(function () {
-    Route::post('/permissions/assign-or-remove', [IndexController::class, 'assignOrRemovePermissions']);
+    Route::post('/permissions/assign-or-remove', [IndexController::class, 'assignOrRemovePermissions'])->name('api.permissions.assign-or-remove');
 });

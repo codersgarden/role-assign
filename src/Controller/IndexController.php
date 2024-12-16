@@ -10,7 +10,7 @@ class IndexController extends Controller
 {
     public function assignOrRemovePermissions(Request $request)
     {  
-       
+      
         $request->validate([
             'role_id' => 'required|exists:roles,id',
             'permission_id' => 'required|exists:permissions,id',
