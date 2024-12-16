@@ -13,33 +13,31 @@
 <body>
     <div class="container my-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="h3">Role Table</h1>
-            <a href="{{ route('roles.create') }}" class="btn btn-primary">Create Role</a>
+            <h1 class="h3">Permission Group Table</h1>
+            <a href="{{ route('permission-groups.create') }}" class="btn btn-primary">Create</a>
         </div>
         <table class="table table-bordered table-hover">
             <thead class="table-light">
                 <tr>
                     <th>ID</th>
-                    <th>Role Name</th>
-                    <th>Description</th>
+                    <th>Name</th>
+                    <th>slug</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($roles as $role)
+                @forelse ($permissionGroups as $permissionGroup)
                     <tr>
-                        <td>{{ $role->id }}</td>
-                        <td>{{ $role->name }}</td>
-                        <td>{{ $role->slug }}</td>
+                        <td>{{ $permissionGroup->id }}</td>
+                        <td>{{ $permissionGroup->name }}</td>
+                        <td>{{ $permissionGroup->slug }}</td>
                         <td>
-                            <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-sm btn-warning me-2">Edit</a>
-                            <form action="{{ route('roles.destroy', $role->id) }}" method="post" class="d-inline">
+                            <a href="{{ route('permission-groups.edit', $permissionGroup->id) }}" class="btn btn-sm btn-warning me-2">Edit</a>
+                            <form action="{{ route('permission-groups.destroy', $permissionGroup->id) }}" method="post" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
                             </form>
-
-                            <a href="{{ route('roles.permissions', $role->id) }}" class="btn btn-sm btn-warning me-2">Permission</a>
                         </td>
                     </tr>
                 @empty
