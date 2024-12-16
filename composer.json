@@ -1,0 +1,19 @@
+{
+    "name": "codersgarden/roleassign",
+    "description": "Role And Permission",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Dev Codersgarden",
+            "email": "info.codersgarden@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Codersgarden\\RoleAssign\\": "src/"
+        }
+    },
+    "require": {}
+}
