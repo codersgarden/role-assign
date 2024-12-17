@@ -13,7 +13,10 @@
     "autoload": {
         "psr-4": {
             "Codersgarden\\RoleAssign\\": "src/"
-        }
+        },
+        "files": [
+            "src/Helpers/helper.php"
+        ]
     },
     "require": {}
 }

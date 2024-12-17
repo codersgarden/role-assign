@@ -17,7 +17,9 @@
     <div class="container my-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="h3">Role Table</h1>
-                <a href="{{ route('roles.create') }}" class="btn btn-primary"  id="roleCreateButton">Create Role</a>
+            @if(checkPermission('create_role'))
+            <a href="{{ route('roles.create') }}" class="btn btn-primary" id="roleCreateButton">Create Role</a>
+        @endif
         </div>
         <table class="table table-bordered table-hover">
             <thead class="table-light">
