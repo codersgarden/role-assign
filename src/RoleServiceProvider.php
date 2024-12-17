@@ -9,7 +9,7 @@ class RoleServiceProvider extends ServiceProvider
     public function boot()
     {
 
-       
+        include_once __DIR__.'/Helpers/custom_helpers.php';
 
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
 

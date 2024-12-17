@@ -13,7 +13,10 @@
     <div class="container my-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="h3">Permission Group Table</h1>
+
+            @if(checkPermission('permission-groups.create'))
             <a href="{{ route('permission-groups.create') }}" class="btn btn-primary" id="add-permission-group">Create Permission Group</a>
+            @endif
         </div>
         <table class="table table-bordered table-hover">
             <thead class="table-light">
@@ -31,12 +34,18 @@
                         <td>{{ $permissionGroup->name }}</td>
                         <td>{{ $permissionGroup->slug }}</td>
                         <td>
+
+                            @if(checkPermission('permission-groups.edit'))
                             <a href="{{ route('permission-groups.edit', $permissionGroup->id) }}" class="btn btn-sm btn-warning me-2" id="edit-permission-group">Edit</a>
+                            @endif
+
+                            @if(checkPermission('permission-groups.destroy'))
                             <form action="{{ route('permission-groups.destroy', $permissionGroup->id) }}" method="post" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')" id="delete-permission-group">Delete</button>
                             </form>
+                            @endif
                         </td>
                     </tr>
                 @empty
