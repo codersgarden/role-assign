@@ -32,8 +32,6 @@ class CheckPermission
      */
     public function handle(Request $request, Closure $next)
     {
-
-        dd("hello");
         // Get the authenticated user
         $user = Auth::user();
 
@@ -48,13 +46,15 @@ class CheckPermission
         // Get the name of the current route
         $currentRouteName = $request->route()->getName();
 
+       
+
         // Check if the user is an admin
         if ($user->role_id == self::ADMIN_ID) {
             // Redirect admin if trying to access a restricted route
             if (in_array($currentRouteName, $this->noAccessRoutesForAdmin)) {
                 return redirect()->back()->with([
                     'status' => 'warn',
-                    'message' => __('scenario.PermissionDenied'),
+                    'message' =>'Access Denied',
                 ]);
             }
 
@@ -64,20 +64,13 @@ class CheckPermission
 
         // Check permissions for non-admin users
         $permissions = $this->getAllPermissionsForActiveUser();
+
         $permissionExists = Permission::where('route', $currentRouteName)->exists();
 
         // If the route doesn't require permissions, allow access
         if (!$permissionExists) {
             return $next($request);
         }
-
-        // Deny access if the user lacks required permissions
-        // if (!in_array($currentRouteName, $permissions)) {
-        //     return redirect()->back()->with([
-        //         'status' => 'warn',
-        //         'message' => __('scenario.PermissionDenied'),
-        //     ]);
-        // }
 
         // Allow access for users with valid permissions
         return $next($request);
@@ -90,12 +83,14 @@ class CheckPermission
      */
     private function getAllPermissionsForActiveUser(): array
     {
+
         $permissions = [];
         
         if (Auth::check()) {
             $user = Auth::user()->load('role');
             $roleID = $user->role->id;
 
+            
             $permissions = RolePermission::where('role_permissions.role_id', $roleID)
                 ->leftJoin('permissions', 'permissions.id', '=', 'role_permissions.permission_id')
                 ->pluck('permissions.route')
