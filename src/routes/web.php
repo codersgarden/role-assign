@@ -7,7 +7,7 @@ use Codersgarden\RoleAssign\Controller\IndexController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::prefix('roles')->group(function () {
+Route::middleware(['auth', 'checkpermission'])->prefix('roles')->group(function () {
     Route::get('/', [RoleController::class, 'index'])->name('roles.index');
     Route::get('/create', [RoleController::class, 'create'])->name('roles.create');
     Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('roles.edit');
@@ -20,7 +20,7 @@ Route::prefix('roles')->group(function () {
 
 
 
-Route::prefix('/permission-groups')->group(function () {
+Route::middleware(['auth', 'checkpermission'])->prefix('/permission-groups')->group(function () {
     Route::get('/', [PermissionGroupsController::class, 'index'])->name('permission-groups.index');
     Route::get("/create", [PermissionGroupsController::class,  "create"])->name("permission-groups.create");
     Route::get("/edit/{ulid}", [PermissionGroupsController::class,  "edit"])->name("permission-groups.edit");
@@ -32,7 +32,7 @@ Route::prefix('/permission-groups')->group(function () {
 
 
 // -----------------------Permissions Routes Start----------------------- 
-Route::prefix('/permissions')->group(function () {
+Route::middleware(['auth', 'checkpermission'])->prefix('/permissions')->group(function () {
     Route::get('/', [PermissionsController::class, 'index'])->name('permissions.index');
     Route::get("/create", [PermissionsController::class,  "create"])->name("permissions.create");
     Route::get("/edit/{id}", [PermissionsController::class,  "edit"])->name("permissions.edit");
@@ -43,6 +43,6 @@ Route::prefix('/permissions')->group(function () {
 // -----------------------Permissions Routes End-----------------------
 
 // -----------------------Assigning Permissions and Removing Permissions Routes-API Start-----------------------
-Route::prefix('/api')->group(function () {
+Route::middleware(['auth'])->prefix('/api')->group(function () {
     Route::post('/permissions/assign-or-remove', [IndexController::class, 'assignOrRemovePermissions'])->name('api.permissions.assign-or-remove');
 });
