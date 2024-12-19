@@ -19,9 +19,7 @@ class RoleServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 
-        // if ($this->app->runningInConsole()) {
-        //     $this->runSeeder();
-        // }
+    
     }
 
     public function register()
@@ -29,12 +27,4 @@ class RoleServiceProvider extends ServiceProvider
         //
     }
 
-
-    // protected function runSeeder()
-    // {
-    //     if (Artisan::output()) {
-         
-    //         Artisan::call('db:seed', ['--class' => 'Codersgarden\\RoleAssign\\Database\\Seeders\\DatabaseSeeder']);
-    //     }
-    // }
 }

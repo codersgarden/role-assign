@@ -17,12 +17,7 @@
         "files": [
             "src/Helpers/custom_helpers.php"
         ]
-        // "scripts": {
-        //     "post-install-cmd": [
-        //         "@php artisan db:seed --class=Codersgarden\\RoleAssign\\Database\\Seeders\\DatabaseSeeder"
-        //     ]
-        // }
-       
+        
     },
     "extra": {
         "laravel": {
