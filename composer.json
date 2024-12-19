@@ -16,7 +16,12 @@
         },
         "files": [
             "src/Helpers/custom_helpers.php"
-        ]
+        ],
+        "scripts": {
+            "post-install-cmd": [
+                "@php artisan db:seed --class=Codersgarden\\RoleAssign\\database\\seeders\\DatabaseSeeder"
+            ]
+        }
        
     },
     "extra": {
