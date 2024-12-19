@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Seeders;
+namespace Codersgarden\RoleAssign\Database\Seeders;
 
-use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Codersgarden\RoleAssign\Models\Role;
 
 class RolesSeeder extends Seeder
 {

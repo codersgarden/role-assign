@@ -1,10 +1,11 @@
 <?php
 
-namespace Database\Seeders;
+namespace Codersgarden\RoleAssign\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Codersgarden\RoleAssign\Models\PermissionGroup;
 
 class PermissionGroupSeeder extends Seeder
 {
