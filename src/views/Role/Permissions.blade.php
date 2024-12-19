@@ -10,42 +10,44 @@
 </head>
 <body>
 
-<div class="container-fluid my-5">
-    <div class="row justify-content-start">
-        <div class="col-md-4 col-lg-6 col-xxl-7 mb-3">
-            <h1 class="page-title">{{ $role->name }}</h1>
-        </div>
-        <div class="col-md-8 col-lg-6 col-xxl-5 mb-3">
-            <a href="{{ route('roles.index') }}" class="btn btn-outline-danger float-end text-dark">Back</a>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body p-4">
-                    @foreach ($permissionGroups as $permissionGroup)
-                        <div class="mb-4">
-                            <strong class="card-title">{{ $permissionGroup->name }}</strong>
-                            <div class="form-card mt-3">
-                                <div class="d-grid gap-3" style="grid-template-columns: repeat(4, 1fr);">
-                                    @foreach ($permissionGroup->permissions as $permission)
-                                        <div class="form-check form-switch form-switch-md">
-                                            <input class="form-check-input" type="checkbox" id="permission-{{ $permission->id }}"
-                                                value="{{ $permission->id }}" {{ in_array($permission->id, $assignedPermissions) ? 'checked' : '' }}
-                                                onchange="togglePermission({{ $permission->id }}, this.checked)">
-                                            <span class="ms-2 text-dark text-capitalize"><b>{{ $permission->name }}</b></span>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
+    <div class="container mt-5">
+        <!-- Header Section -->
+        <div class="row justify-content-between align-items-center mb-4 m-3">
+            <div class="col-md-6">
+                <h1 class="page-title text-black">{{ $role->name }}</h1>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <a href="{{ route('roles.index') }}" class="btn btn-outline-danger">Back</a>
             </div>
         </div>
+    
+        <!-- Permissions Assignment Section -->
+        <div class="w-100 mx-auto p-4 rounded">
+            @foreach ($permissionGroups as $permissionGroup)
+                <div class="mb-4">
+                    <!-- Permission Group Title -->
+                    <h3 class="text-secondary border-bottom pb-2 mb-3">{{ $permissionGroup->name }}</h3>
+    
+                    <!-- Permission Items -->
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
+                        @foreach ($permissionGroup->permissions as $permission)
+                            <div class="col">
+                                <div class="form-check form-switch d-flex align-items-center">
+                                    <input class="form-check-input" type="checkbox" id="permission-{{ $permission->id }}"
+                                        value="{{ $permission->id }}" {{ in_array($permission->id, $assignedPermissions) ? 'checked' : '' }}
+                                        onchange="togglePermission({{ $permission->id }}, this.checked)">
+                                    <label for="permission-{{ $permission->id }}" class="form-check-label ms-2 text-dark">
+                                        <b>{{ $permission->name }}</b>
+                                    </label>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </div>
-</div>
+    
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/vue3-toastify/dist/index.js"></script>
