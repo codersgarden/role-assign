@@ -43,7 +43,9 @@ class RoleServiceProvider extends ServiceProvider
      */
     protected function runSeeder()
     {
-        // Run the seeder automatically
-        Artisan::call('db:seed', ['--class' => 'Codersgarden\\RoleAssign\\Database\\Seeders\\DatabaseSeeder']);
+        Artisan::call('db:seed', ['--class' => 'Codersgarden\\RoleAssign\\Database\\Seeders\\RoleSeeder']);
+        Artisan::call('db:seed', ['--class' => 'Codersgarden\\RoleAssign\\Database\\Seeders\\PermissionSeeder']);
+        Artisan::call('db:seed', ['--class' => 'Codersgarden\\RoleAssign\\Database\\Seeders\\RolePermissionSeeder']);
+        Artisan::call('db:seed', ['--class' => 'Codersgarden\\RoleAssign\\Database\\Seeders\\PermissionGroupSeeder']);
     }
 }
