@@ -1,6 +1,6 @@
 <?php
 
-namespace Codersgarden\RoleAssign\Database\Seeders;
+namespace Codersgarden\RoleAssign\database\seeders;
 
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
