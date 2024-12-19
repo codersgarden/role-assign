@@ -26,28 +26,24 @@ class RoleServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
         if ($this->app->runningInConsole()) {
-            $this->publishMigrations();
+            $this->runMigrations();
             $this->runSeeder();
         }
     }
 
 
 
-    protected function publishMigrations()
+    protected function runMigrations()
     {
-        $this->publishes([
-            __DIR__ . '/database/migrations' => database_path('migrations')
-        ], 'migrations');
+        // Run migrations automatically
+        Artisan::call('migrate', ['--force' => true]);
     }
-
     /**
      * Run the database seeder.
      */
     protected function runSeeder()
     {
-        if (Artisan::output()) {
-            // Run the seeder automatically
-            Artisan::call('db:seed', ['--class' => 'Codersgarden\\RoleAssign\\database\\seeders\\DatabaseSeeder']);
-        }
+        // Run the seeder automatically
+        Artisan::call('db:seed', ['--class' => 'Codersgarden\\RoleAssign\\Database\\Seeders\\DatabaseSeeder']);
     }
 }
