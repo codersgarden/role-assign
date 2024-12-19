@@ -20,6 +20,8 @@ Route::middleware(['auth','web',CheckPermission::class])->prefix('roles')->group
 
 
 
+
+
 Route::middleware(['auth','web',CheckPermission::class])->prefix('/permission-groups')->group(function () {
     Route::get('/', [PermissionGroupsController::class, 'index'])->name('permission-groups.index');
     Route::get("/create", [PermissionGroupsController::class,  "create"])->name("permission-groups.create");

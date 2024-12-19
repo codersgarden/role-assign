@@ -46,7 +46,7 @@ class CheckPermission
         // Get the name of the current route
         $currentRouteName = $request->route()->getName();
 
-       
+
 
         // Check if the user is an admin
         if ($user->role_id == self::ADMIN_ID) {
@@ -54,7 +54,7 @@ class CheckPermission
             if (in_array($currentRouteName, $this->noAccessRoutesForAdmin)) {
                 return redirect()->back()->with([
                     'status' => 'warn',
-                    'message' =>'Access Denied',
+                    'message' => 'Access Denied',
                 ]);
             }
 
@@ -72,6 +72,11 @@ class CheckPermission
             return $next($request);
         }
 
+        // Redirect if the user does not have permission for the current route
+        if (!in_array($currentRouteName, $permissions)) {
+            abort(403, 'Access Denied');
+        }
+
         // Allow access for users with valid permissions
         return $next($request);
     }
@@ -85,12 +90,13 @@ class CheckPermission
     {
 
         $permissions = [];
-        
+
         if (Auth::check()) {
             $user = Auth::user()->load('role');
+
             $roleID = $user->role->id;
 
-            
+
             $permissions = RolePermission::where('role_permissions.role_id', $roleID)
                 ->leftJoin('permissions', 'permissions.id', '=', 'role_permissions.permission_id')
                 ->pluck('permissions.route')
