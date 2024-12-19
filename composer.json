@@ -19,5 +19,12 @@
         ]
        
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+               "Codersgarden\\RoleAssign\\RoleServiceProvider"
+            ]
+        }
+    },
     "require": {}
 }
