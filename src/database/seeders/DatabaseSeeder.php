@@ -1,9 +1,6 @@
 <?php
 
 namespace Codersgarden\RoleAssign\Database\Seeders;
-
-
-
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,6 +12,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(PermissionGroupSeeder::class);
         $this->call(PermissionSeeder::class);
-         $this->call(RolesSeeder::class);
+        $this->call(RolesSeeder::class);
     }
 }
