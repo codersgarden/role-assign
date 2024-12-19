@@ -19,7 +19,7 @@
         ],
         "scripts": {
             "post-install-cmd": [
-                "@php artisan db:seed --class=Codersgarden\\RoleAssign\\database\\seeders\\DatabaseSeeder"
+                "@php artisan db:seed --class=Codersgarden\\RoleAssign\\Database\\Seeders\\DatabaseSeeder"
             ]
         }
        

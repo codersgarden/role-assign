@@ -3,6 +3,7 @@
 namespace Codersgarden\RoleAssign\Database\Seeders;
 
 
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder

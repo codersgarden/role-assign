@@ -34,7 +34,7 @@ class RoleServiceProvider extends ServiceProvider
     {
         if (Artisan::output()) {
             // If Artisan is available, run the seeder
-            Artisan::call('db:seed', ['--class' => 'Codersgarden\\RoleAssign\\database\\seeders\\DatabaseSeeder']);
+            Artisan::call('db:seed', ['--class' => 'Codersgarden\\RoleAssign\\Database\\Seeders\\DatabaseSeeder']);
         }
     }
 }
