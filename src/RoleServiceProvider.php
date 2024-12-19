@@ -49,3 +49,5 @@ class RoleServiceProvider extends ServiceProvider
         Artisan::call('db:seed', ['--class' => 'Codersgarden\\RoleAssign\\database\\seeders\\PermissionGroupSeeder']);
     }
 }
+
+
