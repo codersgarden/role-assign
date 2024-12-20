@@ -8,7 +8,9 @@ use Codersgarden\RoleAssign\Middleware\CheckPermission;
 use Illuminate\Support\Facades\Route;
 
 
-Route::middleware([CheckPermission::class])->prefix('roles')->group(function () {
+Route::middleware(['auth','web',CheckPermission::class])->prefix('/ACL')->group(function () {
+   
+Route::prefix('roles')->group(function () {
     Route::get('/', [RoleController::class, 'index'])->name('roles.index');
     Route::get('/create', [RoleController::class, 'create'])->name('roles.create');
     Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('roles.edit');
@@ -19,10 +21,7 @@ Route::middleware([CheckPermission::class])->prefix('roles')->group(function () 
 });  
 
 
-
-
-
-Route::middleware(['auth','web',CheckPermission::class])->prefix('/permission-groups')->group(function () {
+Route::prefix('/permission-groups')->group(function () {
     Route::get('/', [PermissionGroupsController::class, 'index'])->name('permission-groups.index');
     Route::get("/create", [PermissionGroupsController::class,  "create"])->name("permission-groups.create");
     Route::get("/edit/{ulid}", [PermissionGroupsController::class,  "edit"])->name("permission-groups.edit");
@@ -32,17 +31,16 @@ Route::middleware(['auth','web',CheckPermission::class])->prefix('/permission-gr
 });
 //-----------------------Permission Group Routes End----------------------- 
 
-
-
-
 //-----------------------Permissions Routes Start----------------------- 
-Route::middleware(['auth','web',CheckPermission::class])->prefix('/permissions')->group(function () {
+Route::prefix('/permissions')->group(function () {
     Route::get('/', [PermissionsController::class, 'index'])->name('permissions.index');
     Route::get("/create", [PermissionsController::class,  "create"])->name("permissions.create");
     Route::get("/edit/{id}", [PermissionsController::class,  "edit"])->name("permissions.edit");
     Route::delete("/destroy/{id}", [PermissionsController::class,  "destroy"])->name("permissions.destroy");
     Route::post("/store", [PermissionsController::class,  "store"])->name("permissions.store");
     Route::post("/update/{id}", [PermissionsController::class,  "update"])->name("permissions.update");
+});
+
 });
 // -----------------------Permissions Routes End-----------------------
 
