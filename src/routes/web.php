@@ -8,7 +8,7 @@ use Codersgarden\RoleAssign\Middleware\CheckPermission;
 use Illuminate\Support\Facades\Route;
 
 
-Route::middleware(['auth','web',CheckPermission::class])->prefix('roles')->group(function () {
+Route::middleware([CheckPermission::class])->prefix('roles')->group(function () {
     Route::get('/', [RoleController::class, 'index'])->name('roles.index');
     Route::get('/create', [RoleController::class, 'create'])->name('roles.create');
     Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('roles.edit');

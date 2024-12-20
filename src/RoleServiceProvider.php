@@ -25,29 +25,9 @@ class RoleServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
-        if ($this->app->runningInConsole()) {
-            $this->runMigrations();
-            $this->runSeeder();
-        }
+    
     }
 
-
-
-    protected function runMigrations()
-    {
-        // Run migrations automatically
-        Artisan::call('migrate', ['--force' => true]);
-    }
-    /**
-     * Run the database seeder.
-     */
-    protected function runSeeder()
-    {
-        Artisan::call('db:seed', ['--class' => 'Codersgarden\\RoleAssign\\database\\seeders\\PermissionGroupSeeder']);
-        Artisan::call('db:seed', ['--class' => 'Codersgarden\\RoleAssign\\database\\seeders\\PermissionSeeder']);
-        Artisan::call('db:seed', ['--class' => 'Codersgarden\\RoleAssign\\database\\seeders\\RolesSeeder']);
-        Artisan::call('db:seed', ['--class' => 'Codersgarden\\RoleAssign\\database\\seeders\\RolePermissionSeeder']);
-    }
 }
 
 
