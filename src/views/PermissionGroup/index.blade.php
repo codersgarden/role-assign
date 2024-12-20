@@ -1,3 +1,8 @@
+@php
+    // Define the list of authorized emails (this could also be passed from the controller)
+    $aclEmails = explode(',', config('custom.acl_users'));
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +21,7 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="h3">Permission Group Table</h1>
 
-            @if(checkPermission('permission-groups.create'))
+            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.create'))
             <a href="{{ route('permission-groups.create') }}" class="btn btn-primary" id="add-permission-group">
                 <i class="fas fa-plus-circle me-2"></i> Create Permission Group
             </a>
@@ -39,13 +44,13 @@
                         <td>{{ $permissionGroup->name }}</td>
                         <td>{{ $permissionGroup->slug }}</td>
                         <td>
-                            @if(checkPermission('permission-groups.edit'))
+                            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.edit'))
                             <a href="{{ route('permission-groups.edit', $permissionGroup->id) }}" class="btn btn-sm btn-warning me-2" id="edit-permission-group">
                                 <i class="fas fa-edit"></i>
                             </a>
                             @endif
 
-                            @if(checkPermission('permission-groups.destroy'))
+                            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.destroy'))
                             <form action="{{ route('permission-groups.destroy', $permissionGroup->id) }}" method="post" class="d-inline">
                                 @csrf
                                 @method('DELETE')

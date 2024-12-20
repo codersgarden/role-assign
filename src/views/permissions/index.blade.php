@@ -1,3 +1,8 @@
+@php
+    // Define the list of authorized emails (this could also be passed from the controller)
+    $aclEmails = explode(',', config('custom.acl_users'));
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +23,7 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="h3">Permission Table</h1>
 
-            @if (checkPermission('permissions.create'))
+            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.create'))
                 <a href="{{ route('permissions.create') }}" class="btn btn-primary" id="createPermissionButton">
                     <i class="fas fa-plus-circle me-2"></i>Create Permission
                 </a>
@@ -41,14 +46,14 @@
                         <td>{{ $permission->name }}</td>
                         <td>{{ $permission->route }}</td>
                         <td>
-                            @if (checkPermission('permissions.edit'))
+                            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.edit'))
                                 <a href="{{ route('permissions.edit', $permission->id) }}" 
                                    class="btn btn-sm btn-warning me-2" id="editPermissionButton">
                                     <i class="fas fa-edit"></i>
                                 </a>
                             @endif
 
-                            @if (checkPermission('permissions.destroy'))
+                            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.destroy'))
                                 <form action="{{ route('permissions.destroy', $permission->id) }}" method="post" 
                                       class="d-inline">
                                     @csrf
