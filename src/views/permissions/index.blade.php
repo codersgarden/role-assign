@@ -1,6 +1,16 @@
 @php
     // Define the list of authorized emails (this could also be passed from the controller)
-    $aclEmails = explode(',', config('custom.acl_users'));
+    $aclConfig = config('custom.acl_users');
+
+        // Ensure ACL_USERS is treated as an array
+        $aclEmails = is_array($aclConfig)
+            ? $aclConfig
+            : array_map(
+                function ($email) {
+                    return trim($email, "'\"");
+                },
+                explode(',', trim($aclConfig, "[]"))
+            );
 @endphp
 
 <!DOCTYPE html>

@@ -27,8 +27,18 @@ class CheckPermission
         // Get the current route name
         $currentRouteName = $request->route()->getName();
 
-        // Step 1: Check if the user email is in ACL and exists in the users table
-        $aclEmails = explode(',', config('custom.acl_users'));
+        $aclConfig = config('custom.acl_users');
+
+        // Ensure ACL_USERS is treated as an array
+        $aclEmails = is_array($aclConfig)
+            ? $aclConfig
+            : array_map(
+                function ($email) {
+                    return trim($email, "'\"");
+                },
+                explode(',', trim($aclConfig, "[]"))
+            );
+
 
         // Check if user email is in ACL list
         if (in_array($user->email, $aclEmails)) {
@@ -66,26 +76,21 @@ class CheckPermission
         }
 
 
-
         $permissions = $this->getAllPermissionsForActiveUser();
 
         $permissionExists = Permission::where('route', $currentRouteName)->exists();
 
-
-        // If the route doesn't require permissions, allow access
         if (!$permissionExists) {
             return $next($request);
         }
 
-        // Redirect if the user does not have permission for the current route
         if (!in_array($currentRouteName, $permissions)) {
             abort(403, 'Access Denied');
         }
 
-        // Allow access for users with valid permissions
         return $next($request);
 
-        // If none of the conditions are met, deny access
+
         abort(403, 'Access Denied');
     }
 

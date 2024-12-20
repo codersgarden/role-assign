@@ -3,15 +3,15 @@
 namespace Codersgarden\RoleAssign;
 
 use Illuminate\Support\ServiceProvider;
-use Codersgarden\RoleAssign\database\seeders\DatabaseSeeder;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 
 class RoleServiceProvider extends ServiceProvider
 {
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/config/custom.php', 'lexoffice');
+        $this->mergeConfigFrom(__DIR__ . '/config/custom.php', 'custom');
     }
 
     public function boot()
@@ -20,7 +20,13 @@ class RoleServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/config/custom.php' => config_path('custom.php'),
         ], 'config');
-         
+
+
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+
+        if ($this->app->runningInConsole()) {
+            $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        }
 
         include_once __DIR__ . '/Helpers/custom_helpers.php';
 
@@ -28,10 +34,20 @@ class RoleServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/views', 'roleassign');
 
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+
+        if ($this->app->runningInConsole() && !Config::get('custom')) {
+            Artisan::call('vendor:publish', [
+                '--provider' => 'Codersgarden\RoleAssign\RoleServiceProvider',
+                '--tag' => 'config',
+            ]);
+        }
 
     
+    
     }
+
+
+
 
 }
 
