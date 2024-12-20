@@ -11,11 +11,16 @@ class RoleServiceProvider extends ServiceProvider
 
     public function register()
     {
-        //
+        $this->mergeConfigFrom(__DIR__ . '/config/custom.php', 'lexoffice');
     }
 
     public function boot()
     {
+          
+        $this->publishes([
+            __DIR__ . '/config/custom.php' => config_path('custom.php'),
+        ], 'config');
+         
 
         include_once __DIR__ . '/Helpers/custom_helpers.php';
 
