@@ -8,7 +8,9 @@ use Codersgarden\RoleAssign\Middleware\CheckPermission;
 use Illuminate\Support\Facades\Route;
 
 
-Route::middleware(['auth', 'web', CheckPermission::class])->prefix('/ACL')->group(function () {
+Route::get('/dashboard', [IndexController::class, 'index'])->name('index');
+
+Route::middleware(['auth', 'web', CheckPermission::class])->prefix('/acl')->group(function () {
 
     Route::prefix('roles')->group(function () {
         Route::get('/', [RoleController::class, 'index'])->name('roles.index');
