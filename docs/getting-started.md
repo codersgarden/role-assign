@@ -11,7 +11,7 @@ You can install the package via Composer:
 composer require codersgarden/roleassign:dev-main
 ```
 
-After installation, add the service provider to your `config/custom.php` file (if you are not using auto-discovery):
+After installation, add the service provider to your `boostrap/provider.php` file (if you are not using auto-discovery):
 
 
 ```php
