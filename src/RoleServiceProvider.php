@@ -16,7 +16,8 @@ class RoleServiceProvider extends ServiceProvider
 
     public function boot()
     {
-          
+
+
         $this->publishes([
             __DIR__ . '/config/custom.php' => config_path('custom.php'),
         ], 'config');
@@ -41,14 +42,5 @@ class RoleServiceProvider extends ServiceProvider
                 '--tag' => 'config',
             ]);
         }
-
-    
-    
     }
-
-
-
-
 }
-
-

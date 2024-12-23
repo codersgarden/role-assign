@@ -8,8 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="/../css/style.css">
 
+    <link href="{{ asset('package\roleassign\public\assets\css\style.css') }}" rel="stylesheet" type="text/css" />
+   
 </head>
 
 <body>
@@ -18,14 +19,14 @@
     <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container-fluid d-flex justify-content-between">
             <!-- Logo and Back Button -->
-            <div class="d-flex align-items-left col-lg-4 v1">
+            <div class="d-flex align-items-left col-lg-3 v1">
                 <a class="navbar-brand" href="#">
-                    <img src="../package/roleassign/image/LOGO.png" alt="Logo">
+                    <img src="package/roleassign/image/LOGO.png" alt="Logo">
                 </a>
                 <div class="vl"></div>
             </div>
             <!-- Navigation Links -->
-            <div class="d-flex align-items-center col-lg-8 nav-item">
+            <div class="d-flex align-items-center col-lg-9 nav-item">
                 <a class="nav-link me-4 active" href={{ route('roles.index') }}>Roles</a>
                 <a class="nav-link me-4" href={{ route('permissions.index') }}>Permissions</a>
                 <a class="nav-link me-4" href={{ route('permission-groups.index') }}>Permission Group</a>
@@ -44,8 +45,7 @@
 
     <div class="container-fluid">
         <div class="row">
-
-            <table class="table">
+            <table class="table text-center">
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
@@ -62,7 +62,7 @@
                             <td>{{ $role->created_at }}</td>
                             <td>
 
-                                <div class="gap-2">
+                               
                                     {{-- @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('roles.edit')) --}}
                                     <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-sm"
                                         id="roleEditButton" title="Edit Role">
@@ -88,7 +88,7 @@
                                         <i class="fas fa-key"></i>
                                     </a>
                                     {{-- @endif --}}
-                                </div>
+                                
                             </td>
                         </tr>
                     @empty
