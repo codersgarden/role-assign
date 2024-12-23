@@ -2,6 +2,7 @@
 
 namespace Codersgarden\RoleAssign;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
@@ -16,6 +17,17 @@ class RoleServiceProvider extends ServiceProvider
 
     public function boot()
     {
+
+        Route::get('style-css', function () {
+            $path = __DIR__ . '/../resources/assets/css/style.css';  // Path to the CSS file inside the package
+            return response()->file($path);
+        });
+
+
+        Route::get('roleassign-logo', function () {
+            $path = __DIR__ . '/../resources/images/LOGO.png';  // Image path inside the package
+            return response()->file($path);
+        });
 
 
         $this->publishes([
