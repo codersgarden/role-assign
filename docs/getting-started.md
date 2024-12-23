@@ -47,7 +47,7 @@ php artisan vendor:publish --provider="Codersgarden\RoleAssign\RoleServiceProvid
 
 This will create a `config/custom.php` file in your Laravel application where you can set your configuration options:
 
-### `config/custome.php`
+### `config/custom.php`
 
 ```php
 return [
