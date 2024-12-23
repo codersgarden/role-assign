@@ -33,11 +33,11 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="h3">Permission Table</h1>
 
-            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.create'))
+            {{-- @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.create')) --}}
                 <a href="{{ route('permissions.create') }}" class="btn btn-primary" id="createPermissionButton">
                     <i class="fas fa-plus-circle me-2"></i>Create Permission
                 </a>
-            @endif
+            {{-- @endif --}}
 
         </div>
         <table class="table table-bordered table-hover">
@@ -56,14 +56,14 @@
                         <td>{{ $permission->name }}</td>
                         <td>{{ $permission->route }}</td>
                         <td>
-                            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.edit'))
+                            {{-- @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.edit')) --}}
                                 <a href="{{ route('permissions.edit', $permission->id) }}" 
                                    class="btn btn-sm btn-warning me-2" id="editPermissionButton">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                            @endif
+                            {{-- @endif
 
-                            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.destroy'))
+                            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.destroy')) --}}
                                 <form action="{{ route('permissions.destroy', $permission->id) }}" method="post" 
                                       class="d-inline">
                                     @csrf
@@ -73,7 +73,7 @@
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>
-                            @endif
+                            {{-- @endif --}}
                         </td>
                     </tr>
                 @empty

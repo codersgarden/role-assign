@@ -31,11 +31,11 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="h3">Permission Group Table</h1>
 
-            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.create'))
+            {{-- @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.create')) --}}
             <a href="{{ route('permission-groups.create') }}" class="btn btn-primary" id="add-permission-group">
                 <i class="fas fa-plus-circle me-2"></i> Create Permission Group
             </a>
-            @endif
+            {{-- @endif --}}
         </div>
         
         <table class="table table-bordered table-hover">
@@ -54,13 +54,13 @@
                         <td>{{ $permissionGroup->name }}</td>
                         <td>{{ $permissionGroup->slug }}</td>
                         <td>
-                            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.edit'))
+                            {{-- @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.edit')) --}}
                             <a href="{{ route('permission-groups.edit', $permissionGroup->id) }}" class="btn btn-sm btn-warning me-2" id="edit-permission-group">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            @endif
+                            {{-- @endif
 
-                            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.destroy'))
+                            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.destroy')) --}}
                             <form action="{{ route('permission-groups.destroy', $permissionGroup->id) }}" method="post" class="d-inline">
                                 @csrf
                                 @method('DELETE')
@@ -68,7 +68,7 @@
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </form>
-                            @endif
+                            {{-- @endif --}}
                         </td>
                     </tr>
                 @empty
