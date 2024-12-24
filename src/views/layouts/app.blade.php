@@ -79,6 +79,7 @@
 
         .bg-color {
             background-color: #ededf3;
+            opacity: 0.5;
         }
 
         .br-11 {
