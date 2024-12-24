@@ -73,10 +73,11 @@ class CheckPermission
             if ($userExistsInAcl && in_array($currentRouteName, $allowedRoutes)) {
                 return $next($request);
             }
+        } else {
         }
 
 
-        $permissions = $this->getAllPermissionsForActiveUser();
+        $permissions = $this->getAllPermissionsForActiveUser($user);
 
         $permissionExists = Permission::where('route', $currentRouteName)->exists();
 
@@ -95,17 +96,18 @@ class CheckPermission
     }
 
 
-    private function getAllPermissionsForActiveUser(): array
+    private function getAllPermissionsForActiveUser($user): array
     {
 
         $permissions = [];
 
         if (Auth::check()) {
+
+            if (!$user->role) {
+                abort(404, 'Role not found for user');
+            }
             $user = Auth::user()->load('role');
-
             $roleID = $user->role->id;
-
-
             $permissions = RolePermission::where('role_permissions.role_id', $roleID)
                 ->leftJoin('permissions', 'permissions.id', '=', 'role_permissions.permission_id')
                 ->pluck('permissions.route')
