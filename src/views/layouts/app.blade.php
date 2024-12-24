@@ -17,10 +17,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Laravel App')</title>
+
+    <!-- Bootstrap Bundle JS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Toastr CSS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+
 
     <style>
         body {
@@ -43,7 +44,7 @@
             font-weight: bold;
         }
 
-       
+
         .content {
             padding: 10px;
         }
@@ -142,16 +143,69 @@
             --bs-pagination-disabled-border-color: #E8E6E2;
 
         }
+
+
+    /* Toast message styles */
+.toast-message {
+    position: fixed;
+    top: 20px; /* Position from the top */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    padding: 10px 20px; /* Increased padding */
+    font-size: 18px; /* Increased font size */
+    line-height: 1.4;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    opacity: 0; /* Initially invisible */
+    visibility: hidden; /* Initially hidden */
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+/* Show the toast */
+.toast-message.show-toast {
+    opacity: 1;
+    visibility: visible;
+    animation: slideInOut 4s forwards;
+}
+
+/* Slide in and slide out animation */
+@keyframes slideInOut {
+    0% {
+        transform: translateX(-50%) translateY(-20px); /* Start from above */
+        opacity: 0;
+    }
+    20% {
+        transform: translateX(-50%) translateY(0); /* Slide to normal position */
+        opacity: 1;
+    }
+    80% {
+        transform: translateX(-50%) translateY(0); /* Stay in place */
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-50%) translateY(-20px); /* Slide out upwards */
+        opacity: 0;
+    }
+}
+
     </style>
 </head>
 
 <body>
     @include('roleassign::partials.header')
     @yield('content')
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Toastr JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    @if (session('success'))
+    <div id="success-message" class="toast-message show-toast">
+        {{ session('success') }}
+    </div>
+   @endif
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
