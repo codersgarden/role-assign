@@ -11,12 +11,14 @@
         <form action="{{ route('roles.update', $role->id) }}" method="post" class="w-50 mx-auto p-4 rounded">
             @csrf
             <div class="mb-3">
-            <label for="role">Role</label>
-            <input type="text" id="role" name="name" value="{{ old('name', $role->name) }}"
-                placeholder="Role" class="form-control">
+                <label for="role">Role</label>
+                <input type="text" id="role" name="name" value="{{ old('name', $role->name) }}"
+                    placeholder="Role" class="form-control">
+                @if ($errors->has('name'))
+                    <div class="text-danger">{{ $errors->first('name') }}</div>
+                @endif
             </div>
             <button type="submit" class="btn btn-primary w-100">Submit</button>
         </form>
     </div>
-
-    @endsection
+@endsection

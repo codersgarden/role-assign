@@ -17,6 +17,10 @@
                 <label for="role" class="form-label">Permission Group</label>
                 <input type="text" id="Permission Group" name="name" placeholder="Enter Permission Group"
                     class="form-control" required>
+
+                @if ($errors->has('name'))
+                    <div class="text-danger">{{ $errors->first('name') }}</div>
+                @endif
             </div>
             <button type="submit" class="btn btn-primary w-100">Submit</button>
 

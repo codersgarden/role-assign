@@ -9,7 +9,7 @@
     </div>
 
     <div class="container mt-5">
-       
+
 
         <form action="{{ route('permission-groups.update', $permissionGroup->id) }}" method="post"
             class="w-50 mx-auto p-4 rounded">
@@ -17,9 +17,14 @@
 
             <div class="mb-3">
                 <label for="permissionGroup" class="form-label">Permission Group</label>
-                <input type="text" id="permissionGroup" name="name"
-                    value="{{ old('name', $permissionGroup->name) }}" placeholder="permissionGroup"
-                    class="form-control">
+                <input type="text" id="permissionGroup" name="name" value="{{ old('name', $permissionGroup->name) }}"
+                    placeholder="permissionGroup" class="form-control">
+
+                @if ($errors->has('name'))
+                    <div class="text-danger">{{ $errors->first('name') }}</div>
+                @endif
+
+
             </div>
             <button type="submit" class="btn btn-primary w-100">Submit</button>
         </form>
