@@ -73,7 +73,7 @@ This route is used for the ACL dashboard.
 
 
 ```env
-route('index')
+route('roles.index')
 
 ```
 
