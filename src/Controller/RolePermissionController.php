@@ -31,7 +31,7 @@ class RolePermissionController  extends Controller
         $request->validate(['name' => 'required']);
         $role = Role::create($request->all());
 
-        return redirect()->route('role_permission.index')->with('status', 'Role created successfully!');
+        return redirect()->route('role_permission.index')->with('status', 'Role permission created successfully!');
     }
 
     // Show the form to edit an existing role
@@ -46,14 +46,14 @@ class RolePermissionController  extends Controller
         $request->validate(['name' => 'required']);
         $role->update($request->all());
 
-        return redirect()->route('role_permission.index')->with('status', 'Role updated successfully!');
+        return redirect()->route('role_permission.index')->with('status', 'Role permission updated successfully!');
     }
 
     // Delete a role
     public function destroy(Role $role)
     {
         $role->delete();
-        return redirect()->route('role_permission.index')->with('status', 'Role deleted successfully!');
+        return redirect()->route('role_permission.index')->with('status', 'Role permission deleted successfully!');
     }
 
     // Assign permissions to a role

@@ -8,11 +8,11 @@
         <div class="d-flex justify-content-between align-items-center ms-5 me-5">
             <p class="title pt-3">Permission Group</p>
 
-            {{-- @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.create')) --}}
+            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.create'))
             <a href="{{ route('permission-groups.create') }}" class=" br-11 new_roles btn btn-dark">Add New Permission
                 Group</a>
 
-            {{-- @endif --}}
+            @endif
         </div>
     </div>
 
@@ -35,14 +35,14 @@
                         <td>{{ $permissionGroup->name }}</td>
                         <td>{{ $permissionGroup->slug }}</td>
                         <td>
-                            {{-- @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.edit')) --}}
+                            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.edit'))
                             <a href="{{ route('permission-groups.edit', $permissionGroup->id) }}"
                                 class="btn btn-sm" id="edit-permission-group">
                                 <img src="{{ url('edit-icon') }}" alt="Logo">
                             </a>
-                            {{-- @endif
+                            @endif
 
-                            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.destroy')) --}}
+                            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.destroy'))
                             <form action="{{ route('permission-groups.destroy', $permissionGroup->id) }}" method="post"
                                 class="d-inline">
                                 @csrf
@@ -52,7 +52,7 @@
                                     <img src="{{ url('delete-icon') }}" alt="Logo">
                                 </button>
                             </form>
-                            {{-- @endif --}}
+                            @endif
                         </td>
                     </tr>
                 @empty

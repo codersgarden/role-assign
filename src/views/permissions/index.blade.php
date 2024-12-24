@@ -5,10 +5,10 @@
         <div class="d-flex justify-content-between align-items-center ms-5 me-5">
             <p class="title pt-3">Permissions</p>
 
-            {{-- @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.create')) --}}
+            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.create'))
             <a href="{{ route('permissions.create') }}" class=" br-11 new_roles btn btn-dark">Add New Permission</a>
 
-            {{-- @endif --}}
+            @endif
         </div>
     </div>
     <div class="text-center">
@@ -28,14 +28,14 @@
                         <td>{{ $permission->name }}</td>
                         <td>{{ $permission->route }}</td>
                         <td>
-                            {{-- @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.edit')) --}}
+                            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.edit'))
                             <a href="{{ route('permissions.edit', $permission->id) }}"  class="btn btn-sm"
                                 id="editPermissionButton">
                                 <img src="{{ url('edit-icon') }}" alt="Logo">
                             </a>
-                            {{-- @endif
+                            @endif
 
-                            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.destroy')) --}}
+                            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.destroy'))
                             <form action="{{ route('permissions.destroy', $permission->id) }}" method="post"
                                 class="d-inline">
                                 @csrf
@@ -45,7 +45,7 @@
                                     <img src="{{ url('delete-icon') }}" alt="Logo">
                                 </button>
                             </form>
-                            {{-- @endif --}}
+                            @endif
                         </td>
                     </tr>
                 @empty

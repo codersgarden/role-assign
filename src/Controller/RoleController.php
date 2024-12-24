@@ -48,7 +48,7 @@ class RoleController extends Controller
         $role = Role::find($id);
 
         if (!$role) {
-            return redirect()->back()->with(["status" => "error", "message" => trans("messages.role.notFound")]);
+            return redirect()->back()->with(["status" => "error", "message" => "Role not Found"]);
         }
       
         return view(
@@ -69,14 +69,14 @@ class RoleController extends Controller
             $role = Role::find($request->id);
 
             if (!$role) {
-                return redirect()->back()->with(["status" => "error", "message" => trans("messages.role.notFound")]);
+                return redirect()->back()->with(["status" => "error", "message" => "Role not Found"]);
             }
 
             $role->name = $request->name;
             $role->slug = Str::slug($request->name);
             $role->save();
 
-            return redirect()->route('roles.index')->with(["status" => "success", "message" => trans("messages.role.updated")]);
+            return redirect()->route('roles.index')->with(["status" => "success", "message" => "Role updated successfully."]);
         
     }
 
@@ -87,10 +87,10 @@ class RoleController extends Controller
             $role = Role::find($id);
 
             if (!$role) {
-                return redirect()->back()->with(["status" => "error", "message" => trans("messages.role.notFound")]);
+                return redirect()->back()->with(["status" => "error", "message" => "Role not Found"]);
             }
             $role->delete();
-            return redirect()->route('roles.index')->with(["status" => "success", "message" => trans("messages.role.deleted")]);
+            return redirect()->route('roles.index')->with(["status" => "success", "message" => "Role deleted successfully."]);
         
     }
 
@@ -101,7 +101,7 @@ class RoleController extends Controller
         $role = Role::find($id);
 
         if (!$role) {
-            return redirect()->back()->with(["status" => "error", "message" => trans("messages.role.notFound")]);
+            return redirect()->back()->with(["status" => "error", "message" => "Role not Found"]);
         }
         $permissionGroups = PermissionGroup::select('*')->with('permissions')->get();
         $assignedPermissions = RolePermission::where('role_id', $id)->pluck('permission_id')->toArray();

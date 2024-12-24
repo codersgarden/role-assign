@@ -35,7 +35,7 @@ class IndexController extends Controller
     
             return response()->json([
                 'status' => 'assigned',
-                'message' => trans('messages.index.permissionAssigned')
+                'message' => 'permission Assigned successfully'
             ]);
         } else {
             RolePermission::where('role_id', $roleId)
@@ -44,7 +44,7 @@ class IndexController extends Controller
     
             return response()->json([
                 'status' => 'removed',
-                'message' => trans('messages.index.permissionRemoved')
+                'message' => 'permission removed successfully'
             ]);
         }
     }

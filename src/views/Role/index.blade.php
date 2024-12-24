@@ -11,10 +11,9 @@
         <div class="d-flex justify-content-between align-items-center ms-5 me-5">
             <p class="title pt-3">Roles</p>
 
-            {{-- @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('roles.create')) --}}
+            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('roles.create'))
             <a href="{{ route('roles.create') }}" class=" br-11 new_roles btn btn-dark">Add New Role</a>
-
-            {{-- @endif --}}
+            @endif
         </div>
     </div>
     <!-- Table -->
@@ -36,14 +35,14 @@
                         <td>{{ $role->created_at }}</td>
                         <td>
 
-                            {{-- @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('roles.edit')) --}}
+                            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('roles.edit'))
                             <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-sm" id="roleEditButton"
                                 title="Edit Role">
                                 <img src="{{ url('edit-icon') }}" alt="Logo">
                             </a>
-                            {{-- @endif
+                            @endif
 
-                      @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('roles.destroy')) --}}
+                      @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('roles.destroy'))
                             <form action="{{ route('roles.destroy', $role->id) }}" method="post" class="d-inline">
                                 @csrf
                                 @method('DELETE')
@@ -52,15 +51,14 @@
                                     <img src="{{ url('delete-icon') }}" alt="Logo">
                                 </button>
                             </form>
-                            {{-- @endif
+                            @endif
 
-                      @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('roles.permissions')) --}}
+                      @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('roles.permissions'))
                             <a href="{{ route('roles.permissions', $role->id) }}" class="btn btn-sm"
                                 id="rolePermissionButton" title="Manage Permissions">
                                 <i class="fas fa-key"></i>
                             </a>
-                            {{-- @endif --}}
-
+                            @endif
                         </td>
                     </tr>
                 @empty
