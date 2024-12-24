@@ -1,18 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('roleassign::layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Edit Permission Group</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+@section('content')
+    <div class="content bg-color">
+        <div class="d-flex justify-content-between align-items-center ms-5 me-5">
+            <p class="title pt-3">Edit Permission Group</p>
+            <a href="{{ route('permission-groups.index') }}" class=" br-11 new_roles btn btn-dark">Back</a>
+        </div>
+    </div>
 
-<body>
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Edit Permission Group</h1>
+       
 
         <form action="{{ route('permission-groups.update', $permissionGroup->id) }}" method="post"
             class="w-50 mx-auto p-4 rounded">
@@ -27,6 +24,4 @@
             <button type="submit" class="btn btn-primary w-100">Submit</button>
         </form>
     </div>
-</body>
-
-</html>
+@endsection

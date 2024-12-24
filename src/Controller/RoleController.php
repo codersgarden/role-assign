@@ -15,7 +15,7 @@ class RoleController extends Controller
     public function index()
     {
 
-        $roles = Role::all();
+        $roles = Role::paginate(1);
         return view('roleassign::Role.index', [
             'roles' => $roles,
         ]);
@@ -39,6 +39,7 @@ class RoleController extends Controller
         $role->save();
 
         return redirect()->route('roles.index')->with('success', 'Role created successfully.');
+
     }
 
     public function edit(string $id)

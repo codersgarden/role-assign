@@ -18,16 +18,12 @@ class RoleServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        Route::get('style-css', function () {
-            $path = __DIR__ . '/../resources/assets/css/style.css';  // Path to the CSS file inside the package
-            return response()->file($path);
-        });
-
-
-        Route::get('roleassign-logo', function () {
-            $path = __DIR__ . '/../resources/images/LOGO.png';  // Image path inside the package
-            return response()->file($path);
-        });
+        $this->serveStaticFile('style-css', '/../resources/assets/css/style.css');
+        $this->serveStaticFile('back-icon', '/../resources/images/back.png');
+        $this->serveStaticFile('setting-icon', '/../resources/images/setting.png');
+        $this->serveStaticFile('delete-icon', '/../resources/images/delete.png');
+        $this->serveStaticFile('edit-icon', '/../resources/images/pencile.png');
+        $this->serveStaticFile('roleassign-logo', '/../resources/images/LOGO.png');
 
 
         $this->publishes([
@@ -54,5 +50,13 @@ class RoleServiceProvider extends ServiceProvider
                 '--tag' => 'config',
             ]);
         }
+    }
+
+    protected function serveStaticFile($routeName, $filePath)
+    {
+        Route::get($routeName, function () use ($filePath) {
+            $path = __DIR__ . $filePath;
+            return response()->file($path);
+        });
     }
 }

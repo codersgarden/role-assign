@@ -13,7 +13,7 @@ class PermissionGroupsController extends Controller
     public function index()
     {
 
-        $permissionGroups = PermissionGroup::all();
+        $permissionGroups = PermissionGroup::paginate(1);
 
         return view('roleassign::PermissionGroup.index', [
             'permissionGroups' => $permissionGroups,

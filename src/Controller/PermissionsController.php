@@ -13,9 +13,8 @@ class PermissionsController extends Controller
 
     public function index(Request $request)
     {
-
-        $permissions = Permission::all();
-
+    
+        $permissions = Permission::paginate(1);
         return view('roleassign::Permissions.index', ['permissions' => $permissions]);
        
     }

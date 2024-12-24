@@ -1,45 +1,26 @@
-@php
-    // Define the list of authorized emails (this could also be passed from the controller)
-    $aclConfig = config('custom.acl_users');
+@extends('roleassign::layouts.app')
 
-        // Ensure ACL_USERS is treated as an array
-        $aclEmails = is_array($aclConfig)
-            ? $aclConfig
-            : array_map(
-                function ($email) {
-                    return trim($email, "'\"");
-                },
-                explode(',', trim($aclConfig, "[]"))
-            );
-@endphp
+@section('content')
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Permission Group</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome for Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <script src="js/general.js"></script>
-</head>
-<body>
-    <div class="container my-4">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="h3">Permission Group Table</h1>
+
+
+    <div class="content bg-color">
+        <div class="d-flex justify-content-between align-items-center ms-5 me-5">
+            <p class="title pt-3">Permission Group</p>
 
             {{-- @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.create')) --}}
-            <a href="{{ route('permission-groups.create') }}" class="btn btn-primary" id="add-permission-group">
-                <i class="fas fa-plus-circle me-2"></i> Create Permission Group
-            </a>
+            <a href="{{ route('permission-groups.create') }}" class=" br-11 new_roles btn btn-dark">Add New Permission
+                Group</a>
+
             {{-- @endif --}}
         </div>
-        
-        <table class="table table-bordered table-hover">
-            <thead class="table-light">
+    </div>
+
+
+
+    <div class="text-center">
+        <table class="table">
+            <thead>
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
@@ -55,17 +36,20 @@
                         <td>{{ $permissionGroup->slug }}</td>
                         <td>
                             {{-- @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.edit')) --}}
-                            <a href="{{ route('permission-groups.edit', $permissionGroup->id) }}" class="btn btn-sm btn-warning me-2" id="edit-permission-group">
-                                <i class="fas fa-edit"></i>
+                            <a href="{{ route('permission-groups.edit', $permissionGroup->id) }}"
+                                class="btn btn-sm" id="edit-permission-group">
+                                <img src="{{ url('edit-icon') }}" alt="Logo">
                             </a>
                             {{-- @endif
 
                             @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.destroy')) --}}
-                            <form action="{{ route('permission-groups.destroy', $permissionGroup->id) }}" method="post" class="d-inline">
+                            <form action="{{ route('permission-groups.destroy', $permissionGroup->id) }}" method="post"
+                                class="d-inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')" id="delete-permission-group">
-                                    <i class="fas fa-trash-alt"></i>
+                                <button type="submit" class="btn btn-sm"
+                                    onclick="return confirm('Are you sure?')" id="delete-permission-group">
+                                    <img src="{{ url('delete-icon') }}" alt="Logo">
                                 </button>
                             </form>
                             {{-- @endif --}}
@@ -79,5 +63,6 @@
             </tbody>
         </table>
     </div>
-</body>
-</html>
+
+    @include('roleassign::layouts.pagination', ['paginator' => $permissionGroups])
+@endsection
