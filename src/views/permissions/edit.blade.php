@@ -1,10 +1,17 @@
 @extends('roleassign::layouts.app')
 
 @section('content')
-    <div class="content bg-color">
-        <div class="d-flex justify-content-between align-items-center ms-5 me-5">
-            <p class="title pt-3">Edit Permission</p>
-            <a href="{{ route('permissions.index') }}" class=" br-11 new_roles btn btn-dark">Back</a>
+    <div class="content">
+        <div class="ms-5 me-5 mt-4">
+            <!-- Breadcrumb -->
+            <nav class="mb-3">
+                <a href="{{ route('permissions.index') }}" class="fw-400 text-decoration-none">Permission</a>
+                <img src="{{ url('pervious-icon') }}" alt="Logo" class="fw-400 mx-2">
+                <span class="fw-400">Edit Permission</span>
+            </nav>
+
+            <!-- Title -->
+            <h2 class="title pt-2 text-uppercase">Edit Permission</h2>
         </div>
     </div>
 
@@ -23,7 +30,7 @@
 
                 <label for="permission_group_id" class="form-label mt-2">Permission Group</label>
 
-                <select name="permission_group_id" id="permission_group_id" class="form-select" required>
+                <select name="permission_group_id" id="permission_group_id" class="form-select form-control">
                     <option value="">Select Permission Group</option>
                     @foreach ($permissionGroups as $permissionGroup)
                         <option value="{{ $permissionGroup->id }}"
@@ -37,8 +44,6 @@
                     <div class="text-danger">{{ $errors->first('permission_group_id') }}</div>
                 @endif
 
-
-
                 <label for="route" class="form-label mt-2">Route</label>
                 <input type="text" id="route" name="route" class="form-control"
                     value="{{ old('route', $permission->route) }}" placeholder="Enter Route">
@@ -48,7 +53,7 @@
                 @endif
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">Submit</button>
+            <button type="submit" class="br-11 new_roles btn btn-dark fs-5">Edit Permission</button>
         </form>
     </div>
 @endsection

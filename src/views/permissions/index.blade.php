@@ -18,7 +18,7 @@
             <p class="title pt-3">Permissions</p>
 
             <div class="d-flex align-items-center ms-auto">
-                <form action="{{ route('permissions.index') }}" method="get" class="d-flex">
+                {{-- <form action="{{ route('permissions.index') }}" method="get" class="d-flex">
                     <input type="text" name="search" class="form-control" placeholder="Search by role name"
                         value="{{ request()->get('search') }}">
                     <button type="submit" class="btn btn-dark ms-2">Filter</button>
@@ -26,7 +26,7 @@
     
                 <form action="{{ route('permissions.index') }}" method="get">
                     <button type="submit" class="btn btn-dark ms-2">Back</button>
-                </form>
+                </form> --}}
 
             @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.create'))
                 <a href="{{ route('permissions.create') }}" class=" br-11 new_roles btn btn-dark">Add New Permission</a>
