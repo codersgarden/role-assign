@@ -1,12 +1,18 @@
 @extends('roleassign::layouts.app')
 
 @section('content')
-    <div class="content bg-color">
-        <div class="d-flex justify-content-between align-items-center ms-5 me-5">
-            <p class="title pt-3">Edit Permission Group</p>
-            <a href="{{ route('permission-groups.index') }}" class=" br-11 new_roles btn btn-dark">Back</a>
+    <div class="content">
+        <div class="ms-5 me-5 mt-4">
+            <!-- Breadcrumb -->
+            <nav class="mb-3">
+                <a href="{{ route('permission-groups.index') }}" class="fw-400 text-decoration-none">Permission Group</a>
+                <img src="{{ url('pervious-icon') }}" alt="Logo" class="fw-400 mx-2">
+                <span class="fw-400">Edit Permission Group</span>
+            </nav>
+
+            <!-- Title -->
+            <h2 class="title pt-2 text-uppercase">Edit Permission Group</h2>
         </div>
-    </div>
 
     <div class="container mt-5">
 
@@ -26,7 +32,7 @@
 
 
             </div>
-            <button type="submit" class="btn btn-primary w-100">Submit</button>
+            <button type="submit" class="br-11 new_roles btn btn-dark ">Edit Permission Group</button>
         </form>
     </div>
 @endsection

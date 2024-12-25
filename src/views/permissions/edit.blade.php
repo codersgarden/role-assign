@@ -53,7 +53,7 @@
                 @endif
             </div>
 
-            <button type="submit" class="br-11 new_roles btn btn-dark fs-5">Edit Permission</button>
+            <button type="submit" class="br-11 new_roles btn btn-dark">Edit Permission</button>
         </form>
     </div>
 @endsection

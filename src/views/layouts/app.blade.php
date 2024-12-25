@@ -25,7 +25,8 @@
 
     <style>
         body {
-            background-color: #f9f9f9;
+            background-color: #F5F5F7;
+            
         }
 
         .table td,
@@ -79,7 +80,7 @@
 
         .bg-color {
             background-color: #ededf3;
-            
+
         }
 
         .br-11 {
@@ -87,9 +88,9 @@
         }
 
         .title {
+            color: black;
             font-weight: 500;
-            font-size: 28px;
-            font-family: jost, sans-serif;
+            font-size: 24px;
         }
 
         .new_roles {
@@ -146,52 +147,90 @@
         }
 
 
-    /* Toast message styles */
-.toast-message {
-    position: fixed;
-    top: 20px; /* Position from the top */
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #4CAF50; /* Green background */
-    color: white;
-    padding: 10px 20px; /* Increased padding */
-    font-size: 18px; /* Increased font size */
-    line-height: 1.4;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    opacity: 0; /* Initially invisible */
-    visibility: hidden; /* Initially hidden */
-    z-index: 9999;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
-}
+        /* Toast message styles */
+        .toast-message {
+            position: fixed;
+            top: 20px;
+            /* Position from the top */
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            padding: 10px 20px;
+            /* Increased padding */
+            font-size: 18px;
+            /* Increased font size */
+            line-height: 1.4;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            /* Initially invisible */
+            visibility: hidden;
+            /* Initially hidden */
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
 
-/* Show the toast */
-.toast-message.show-toast {
-    opacity: 1;
-    visibility: visible;
-    animation: slideInOut 4s forwards;
-}
+        /* Show the toast */
+        .toast-message.show-toast {
+            opacity: 1;
+            visibility: visible;
+            animation: slideInOut 4s forwards;
+        }
 
-/* Slide in and slide out animation */
-@keyframes slideInOut {
-    0% {
-        transform: translateX(-50%) translateY(-20px); /* Start from above */
-        opacity: 0;
-    }
-    20% {
-        transform: translateX(-50%) translateY(0); /* Slide to normal position */
-        opacity: 1;
-    }
-    80% {
-        transform: translateX(-50%) translateY(0); /* Stay in place */
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(-50%) translateY(-20px); /* Slide out upwards */
-        opacity: 0;
-    }
-}
+        /* Slide in and slide out animation */
+        @keyframes slideInOut {
+            0% {
+                transform: translateX(-50%) translateY(-20px);
+                /* Start from above */
+                opacity: 0;
+            }
 
+            20% {
+                transform: translateX(-50%) translateY(0);
+                /* Slide to normal position */
+                opacity: 1;
+            }
+
+            80% {
+                transform: translateX(-50%) translateY(0);
+                /* Stay in place */
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateX(-50%) translateY(-20px);
+                /* Slide out upwards */
+                opacity: 0;
+            }
+        }
+
+
+        .form-control {
+            border: 1px solid rgba(0, 0, 0, 0.3) !important;
+            background-color: #F5F5F7 !important;
+
+        }
+
+        .form-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: black;
+            opacity: 0.4;
+        }
+
+        input::placeholder
+        {
+            color: black !important;
+            opacity: 0.5 !important;
+        }
+
+        
+        .fw-400{
+            opacity: 0.7;
+            color: #000;
+            font-weight: 400 !important;
+            font-size: 18px !important;
+        }
     </style>
 </head>
 
@@ -199,11 +238,13 @@
     @include('roleassign::partials.header')
     @yield('content')
 
-    @if (session('success'))
-    <div id="success-message" class="toast-message show-toast">
-        {{ session('success') }}
+    @if (session('success') || session('error'))
+    <div id="toast-message" 
+         class="toast-message show-toast" 
+         style="background-color: {{ session('success') ? '#4CAF50' : '#F44336' }};">
+        {{ session('success') ?? session('error') }}
     </div>
-   @endif
+@endif
 
     <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

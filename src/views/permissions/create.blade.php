@@ -50,7 +50,7 @@
                     @endif
                 </div>
 
-                <button type="submit" class="br-11 new_roles btn btn-dark fs-5">Add Permission</button>
+                <button type="submit" class="br-11 new_roles btn btn-dark">Add Permission</button>
             </form>
 
         </div>
