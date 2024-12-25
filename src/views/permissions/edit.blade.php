@@ -40,6 +40,7 @@
                     @endforeach
                 </select>
 
+
                 @if ($errors->has('permission_group_id'))
                     <div class="text-danger">{{ $errors->first('permission_group_id') }}</div>
                 @endif
