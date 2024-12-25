@@ -66,7 +66,7 @@
                             @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('roles.permissions'))
                                 <a href="{{ route('roles.permissions', $role->id) }}" class="btn btn-sm"
                                     id="rolePermissionButton" title="Manage Permissions">
-                                    <i class="fas fa-key"></i>
+                                    <i class="fa fa-lock fs-4" aria-hidden="true"></i>
                                 </a>
                             @endif
                         </td>
