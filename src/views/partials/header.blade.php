@@ -20,9 +20,9 @@
     <nav class="col-lg-7 d-flex align-items-center justify-content-start">
         <a class="nav-link {{ request()->routeIs('roles.*') ? 'active' : '' }}"
             href="{{ route('roles.index') }}">Roles</a>
-        <a class="nav-link ms-3 {{ request()->routeIs('permissions.*') ? 'active' : '' }}"
+        <a class="nav-link ms-5 {{ request()->routeIs('permissions.*') ? 'active' : '' }}"
             href="{{ route('permissions.index') }}">Permissions</a>
-        <a class="nav-link ms-3 {{ request()->routeIs('permission-groups.*') ? 'active' : '' }}"
+        <a class="nav-link ms-5 {{ request()->routeIs('permission-groups.*') ? 'active' : '' }}"
             href="{{ route('permission-groups.index') }}">Permission Group</a>
     </nav>
 
