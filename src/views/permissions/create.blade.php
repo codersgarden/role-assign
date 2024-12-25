@@ -12,8 +12,8 @@
         <form action="{{ route('permissions.store') }}" method="post" class="w-50 mx-auto p-4 rounded">
             @csrf
             <div class="mb-3">
-                <label for="name" class="form-label">Role Name</label>
-                <input type="text" id="name" name="name" placeholder="Role Name" class="form-control">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" id="name" name="name" placeholder="Permission Name" class="form-control">
 
                 @if ($errors->has('name'))
                     <div class="text-danger">{{ $errors->first('name') }}</div>

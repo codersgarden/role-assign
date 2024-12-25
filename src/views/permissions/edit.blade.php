@@ -14,7 +14,7 @@
 
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" id="name" name="name" placeholder="Name"
+                <input type="text" id="name" name="name" placeholder="Permission Name"
                     value="{{ old('name', $permission->name) }}" class="form-control">
 
                 @if ($errors->has('name'))

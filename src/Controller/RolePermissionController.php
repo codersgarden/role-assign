@@ -53,7 +53,7 @@ class RolePermissionController  extends Controller
     public function destroy(Role $role)
     {
         $role->delete();
-        return redirect()->route('role_permission.index')->with('status', 'Role permission deleted successfully!');
+        return redirect()->route('role_permission.index');
     }
 
     // Assign permissions to a role

@@ -13,7 +13,7 @@ class PermissionGroupsController extends Controller
     public function index()
     {
 
-        $permissionGroups = PermissionGroup::paginate(1);
+        $permissionGroups = PermissionGroup::orderBy('id', 'desc')->paginate(2);
 
         return view('roleassign::PermissionGroup.index', [
             'permissionGroups' => $permissionGroups,
@@ -50,7 +50,7 @@ class PermissionGroupsController extends Controller
         $permissionGroup = PermissionGroup::find($id);
 
         if (!$permissionGroup) {
-            return redirect()->back()->with("error","permission group not Found");
+            return redirect()->back()->with(["status" => "error", "message" =>"permission group not Found"]);
         }
 
         return view(
@@ -72,7 +72,7 @@ class PermissionGroupsController extends Controller
         $permissionGroup = PermissionGroup::find($id);
 
         if (!$permissionGroup) {
-            return redirect()->back()->with("error","permission group not Found");
+            return redirect()->back()->with(["status" => "error", "message" => "permission group not Found"]);
         }
 
         $permissionGroup->name = $request->name;
@@ -87,9 +87,9 @@ class PermissionGroupsController extends Controller
     {
         $permissionGroup = PermissionGroup::find($id);
         if (!$permissionGroup) {
-            return redirect()->back()->with("error","permission group not Found");
+            return redirect()->back()->with(["status" => "error", "message" => "permission group not Found"]);
         }
         $permissionGroup->delete();
-        return redirect()->route('permission-groups.index')->with('success', 'permission group deleted successfully.');
+        return redirect()->route('permission-groups.index');
     }
 }

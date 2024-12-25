@@ -1,3 +1,15 @@
+@php
+    // Define the list of authorized emails (this could also be passed from the controller)
+    $aclConfig = config('custom.acl_users');
+
+    // Ensure ACL_USERS is treated as an array
+    $aclEmails = is_array($aclConfig)
+        ? $aclConfig
+        : array_map(function ($email) {
+            return trim($email, "'\"");
+        }, explode(',', trim($aclConfig, '[]')));
+@endphp
+
 @extends('roleassign::layouts.app')
 
 @section('content')
@@ -15,18 +27,18 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Name</th>
                     <th>Route</th>
+                    <th>Date</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($permissions as $permission)
                     <tr>
-                        <td>{{ $permission->id }}</td>
                         <td>{{ $permission->name }}</td>
                         <td>{{ $permission->route }}</td>
+                        <td>{{ $permission->created_at }}</td>
                         <td>
                             @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.edit'))
                             <a href="{{ route('permissions.edit', $permission->id) }}"  class="btn btn-sm"
@@ -35,16 +47,17 @@
                             </a>
                             @endif
 
+
                             @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.destroy'))
-                            <form action="{{ route('permissions.destroy', $permission->id) }}" method="post"
-                                class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                    <button type="submit" class="btn btn-sm" id="deletePermissionButton" title="Delete Permission"
-                                    onclick="return confirm('Are you sure?')">
-                                    <img src="{{ url('delete-icon') }}" alt="Logo">
-                                </button>
-                            </form>
+                                <form action="{{ route('permissions.destroy', $permission->id) }}" method="post"
+                                    class="d-inline delete-role-form">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" class="btn btn-sm delete-role-button" id="deletePermissionButton"
+                                        title="Delete Role" data-delete-type="permission">
+                                        <img src="{{ url('delete-icon') }}" alt="Logo">
+                                    </button>
+                                </form>
                             @endif
                         </td>
                     </tr>

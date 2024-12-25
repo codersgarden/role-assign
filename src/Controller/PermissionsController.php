@@ -14,7 +14,7 @@ class PermissionsController extends Controller
     public function index(Request $request)
     {
     
-        $permissions = Permission::paginate(1);
+        $permissions = Permission::orderBy('id', 'desc')->paginate(2);
         return view('roleassign::Permissions.index', ['permissions' => $permissions]);
        
     }
@@ -87,7 +87,7 @@ class PermissionsController extends Controller
       
             $permissions = Permission::where('id', $id)->firstOrFail();
             $permissions->delete();
-            return redirect()->route('permissions.index')->with('success', 'Permission deleted successfully.');
+            return redirect()->route('permissions.index');
         
     }
 }

@@ -1,8 +1,19 @@
+@php
+    // Define the list of authorized emails (this could also be passed from the controller)
+    $aclConfig = config('custom.acl_users');
+
+    // Ensure ACL_USERS is treated as an array
+    $aclEmails = is_array($aclConfig)
+        ? $aclConfig
+        : array_map(function ($email) {
+            return trim($email, "'\"");
+        }, explode(',', trim($aclConfig, '[]')));
+@endphp
+
+
 @extends('roleassign::layouts.app')
 
 @section('content')
-
-
 
     <div class="content bg-color">
         <div class="d-flex justify-content-between align-items-center ms-5 me-5">
@@ -11,29 +22,25 @@
             @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.create'))
             <a href="{{ route('permission-groups.create') }}" class=" br-11 new_roles btn btn-dark">Add New Permission
                 Group</a>
-
             @endif
         </div>
     </div>
-
-
-
     <div class="text-center">
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Name</th>
                     <th>Slug</th>
+                    <th>Date</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($permissionGroups as $permissionGroup)
                     <tr>
-                        <td>{{ $permissionGroup->id }}</td>
                         <td>{{ $permissionGroup->name }}</td>
                         <td>{{ $permissionGroup->slug }}</td>
+                        <td>{{ $permissionGroup->created_at }}</td>
                         <td>
                             @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.edit'))
                             <a href="{{ route('permission-groups.edit', $permissionGroup->id) }}"
@@ -44,15 +51,15 @@
 
                             @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.destroy'))
                             <form action="{{ route('permission-groups.destroy', $permissionGroup->id) }}" method="post"
-                                class="d-inline">
+                                class="d-inline delete-role-form">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm"
-                                    onclick="return confirm('Are you sure?')" id="delete-permission-group">
+                                <button type="button" class="btn btn-sm delete-role-button" id="delete-permission-group"
+                                    title="Delete Role" data-delete-type="permissionGroup">
                                     <img src="{{ url('delete-icon') }}" alt="Logo">
                                 </button>
                             </form>
-                            @endif
+                        @endif
                         </td>
                     </tr>
                 @empty
