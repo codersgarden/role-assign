@@ -19,10 +19,22 @@
         <div class="d-flex justify-content-between align-items-center ms-5 me-5">
             <p class="title pt-3">Permission Group</p>
 
+            <div class="d-flex align-items-center ms-auto">
+                <form action="{{ route('permission-groups.index') }}" method="get" class="d-flex">
+                    <input type="text" name="search" class="form-control" placeholder="Search by role name"
+                        value="{{ request()->get('search') }}">
+                    <button type="submit" class="btn btn-dark ms-2">Filter</button>
+                </form>
+    
+                <form action="{{ route('permission-groups.index') }}" method="get">
+                    <button type="submit" class="btn btn-dark ms-2">Back</button>
+                </form>
+
             @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.create'))
             <a href="{{ route('permission-groups.create') }}" class=" br-11 new_roles btn btn-dark">Add New Permission
                 Group</a>
             @endif
+        </div>
         </div>
     </div>
     <div class="text-center">

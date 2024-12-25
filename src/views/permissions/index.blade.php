@@ -17,12 +17,26 @@
         <div class="d-flex justify-content-between align-items-center ms-5 me-5">
             <p class="title pt-3">Permissions</p>
 
-            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.create'))
-            <a href="{{ route('permissions.create') }}" class=" br-11 new_roles btn btn-dark">Add New Permission</a>
+            <div class="d-flex align-items-center ms-auto">
+                <form action="{{ route('permissions.index') }}" method="get" class="d-flex">
+                    <input type="text" name="search" class="form-control" placeholder="Search by role name"
+                        value="{{ request()->get('search') }}">
+                    <button type="submit" class="btn btn-dark ms-2">Filter</button>
+                </form>
+    
+                <form action="{{ route('permissions.index') }}" method="get">
+                    <button type="submit" class="btn btn-dark ms-2">Back</button>
+                </form>
 
+            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.create'))
+                <a href="{{ route('permissions.create') }}" class=" br-11 new_roles btn btn-dark">Add New Permission</a>
             @endif
+
+            </div>
         </div>
     </div>
+
+    <!-- Table -->
     <div class="text-center">
         <table class="table">
             <thead>
@@ -41,10 +55,10 @@
                         <td>{{ $permission->created_at }}</td>
                         <td>
                             @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.edit'))
-                            <a href="{{ route('permissions.edit', $permission->id) }}"  class="btn btn-sm"
-                                id="editPermissionButton">
-                                <img src="{{ url('edit-icon') }}" alt="Logo">
-                            </a>
+                                <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-sm"
+                                    id="editPermissionButton">
+                                    <img src="{{ url('edit-icon') }}" alt="Logo">
+                                </a>
                             @endif
 
 
@@ -63,7 +77,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="4" class="text-center">No permissions found.</td>
+                        <td colspan="4" class="text-center fw-bold text-muted">No permissions found.</td>
                     </tr>
                 @endforelse
             </tbody>

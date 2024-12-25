@@ -11,14 +11,28 @@
 @endphp
 
 @extends('roleassign::layouts.app')
+
 @section('content')
     <div class="content bg-color">
         <div class="d-flex justify-content-between align-items-center ms-5 me-5">
             <p class="title pt-3">Roles</p>
 
-            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('roles.create'))
-                <a href="{{ route('roles.create') }}" class=" br-11 new_roles btn btn-dark">Add New Role</a>
-            @endif
+            <!-- Right-aligned buttons and search form -->
+            <div class="d-flex align-items-center ms-auto">
+                <form action="{{ route('roles.index') }}" method="get" class="d-flex">
+                    <input type="text" name="search" class="form-control" placeholder="Search by role name"
+                        value="{{ request()->get('search') }}">
+                    <button type="submit" class="btn btn-dark ms-2">Filter</button>
+                </form>
+
+                <form action="{{ route('roles.index') }}" method="get">
+                    <button type="submit" class="btn btn-dark ms-2">Back</button>
+                </form>
+
+                @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('roles.create'))
+                    <a href="{{ route('roles.create') }}" class="br-11 new_roles btn btn-dark ms-3">Add New Role</a>
+                @endif
+            </div>
         </div>
     </div>
     <!-- Table -->
@@ -26,10 +40,10 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Slug</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Actions</th>
+                    <th>Name</th>
+                    <th>Slug</th>
+                    <th>Date</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,7 +60,7 @@
                                     <img src="{{ url('edit-icon') }}" alt="Logo">
                                 </a>
                             @endif
-                            
+
                             @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('roles.destroy'))
                                 <form action="{{ route('roles.destroy', $role->id) }}" method="post"
                                     class="d-inline delete-role-form">
