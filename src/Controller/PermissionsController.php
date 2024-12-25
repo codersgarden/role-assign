@@ -11,18 +11,14 @@ use Illuminate\Http\Request;
 class PermissionsController extends Controller
 {
 
-    public function index(Request $request)
+    public function index()
     {
-        $search = $request->get('search');
-        $permissions = Permission::when($search, function ($query, $search) {
-            return $query->where('name', 'like', '%' . $search . '%');
-        })
-        ->orderBy('id', 'desc')
-        ->paginate(2);
     
+        $permissions = Permission::orderBy('id', 'desc')->paginate(2);
         return view('roleassign::Permissions.index', ['permissions' => $permissions]);
        
     }
+
 
     public function create()
     {
