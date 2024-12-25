@@ -18,7 +18,7 @@ class RoleServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        $this->serveStaticFile('style-css', '/../resources/assets/css/style.css');
+        $this->serveCssFile();
         $this->serveStaticFile('back-icon', '/../resources/images/back.png');
         $this->serveStaticFile('setting-icon', '/../resources/images/setting.png');
         $this->serveStaticFile('delete-icon', '/../resources/images/delete.png');
@@ -60,4 +60,20 @@ class RoleServiceProvider extends ServiceProvider
             return response()->file($path);
         });
     }
+
+
+    protected function serveCssFile()
+{
+    Route::middleware('web')->get('roleassign/resources/css/style.css', function () {
+        $path = __DIR__ . '/../resources/assets/css/style.css';
+
+        if (file_exists($path)) {
+            return response()->file($path, [
+                'Content-Type' => 'text/css',
+            ]);
+        }
+
+        abort(404, 'CSS file not found.');
+    });
+}
 }

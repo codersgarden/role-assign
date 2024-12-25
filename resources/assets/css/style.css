@@ -1,40 +1,76 @@
 body {
-    background-color: red; /* Example background color */
+  background-color: #F5F5F7;
+  
 }
 
-.navbar-custom {
-  background-color: #fff !important;
-  border-bottom: 1px solid #ddd !important;
-  padding: 20px 0 !important;
+.table td,
+.table th {
+  vertical-align: middle;
 }
 
-.navbar-brand img {
-  height: 30px !important;
+.header {
+  background-color: white;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ddd;
 }
+
+.header .logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+
+.content {
+  padding: 10px;
+}
+
+.btn-dark {
+  border-radius: 50px;
+}
+
+.vl {
+  border-left: 3px solid #ddd;
+  height: 40px;
+  margin-top: 10px;
+}
+
 
 .nav-link {
-  color: #6c757d;
-  font-weight: 500;
-  text-decoration: none;
+  color: #000;
+  font-weight: 400;
   font-family: "Jost", sans-serif;
-  font-size: 18px;
+  font-size: 20px;
 }
 
+/* Styles for the active link */
 .nav-link.active {
   font-weight: 600;
-  color: #000;
   text-decoration: underline;
+  color: #000;
   text-decoration-thickness: 2px;
   text-underline-offset: 12px;
-  /* Adds space between text and underline */
 }
 
-/* Table and general styles */
-.table-custom {
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid #ddd;
-  background: #fff;
+
+.bg-color {
+  background-color: #ededf3;
+
+}
+
+.br-11 {
+  border-radius: 12px;
+}
+
+.title {
+  color: black;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.new_roles {
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
 }
 
 .table thead th {
@@ -57,46 +93,115 @@ body {
   padding: 15px 0px;
 }
 
+.pagination .page-item .page-link {
+  color: black;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: black;
+  border-color: black;
+  color: white
+}
+
+.page-item {
+  padding-right: 10px;
+
+}
+
+.page-item .page-link {
+  border-radius: 5px;
+}
+
 .pagination {
-  justify-content: center;
+
+  --bs-pagination-disabled-color: #F5F5F7;
+  --bs-pagination-disabled-bg: #F5F5F7;
+  --bs-pagination-disabled-border-color: #E8E6E2;
+
 }
 
-.vl {
-  border-left: 5px solid #ddd;
-  height: 50px;
-}
 
-.nav-item a {
-  font-weight: 400;
+/* Toast message styles */
+.toast-message {
+  position: fixed;
+  top: 20px;
+  /* Position from the top */
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  padding: 10px 20px;
+  /* Increased padding */
   font-size: 18px;
-  font-family: "Jost", sans-serif;
-  color: #000;
-  text-decoration: none;
+  /* Increased font size */
+  line-height: 1.4;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  /* Initially invisible */
+  visibility: hidden;
+  /* Initially hidden */
+  z-index: 9999;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
-.nav-item a.active {
-  font-weight: 600;
-  text-decoration: underline;
-  color: #000;
-  text-decoration-thickness: 2px;
+/* Show the toast */
+.toast-message.show-toast {
+  opacity: 1;
+  visibility: visible;
+  animation: slideInOut 4s forwards;
 }
 
-.bg-color {
-  background-color: #ededf3;
+/* Slide in and slide out animation */
+@keyframes slideInOut {
+  0% {
+      transform: translateX(-50%) translateY(-20px);
+      /* Start from above */
+      opacity: 0;
+  }
+
+  20% {
+      transform: translateX(-50%) translateY(0);
+      /* Slide to normal position */
+      opacity: 1;
+  }
+
+  80% {
+      transform: translateX(-50%) translateY(0);
+      /* Stay in place */
+      opacity: 1;
+  }
+
+  100% {
+      transform: translateX(-50%) translateY(-20px);
+      /* Slide out upwards */
+      opacity: 0;
+  }
 }
 
-.br-11 {
-  border-radius: 12px;
+
+.form-control {
+  border: 1px solid rgba(0, 0, 0, 0.3) !important;
+  background-color: #F5F5F7 !important;
+
 }
 
-.title {
-  font-weight: 500;
-  font-size: 28px;
-  font-family: jost, sans-serif;
-}
-
-.new_roles {
-  color: #fff;
-  font-weight: 500;
+.form-label {
   font-size: 14px;
+  font-weight: 600;
+  color: black;
+  opacity: 0.4;
+}
+
+input::placeholder
+{
+  color: black !important;
+  opacity: 0.5 !important;
+}
+
+
+.fw-400{
+  opacity: 0.7;
+  color: #000;
+  font-weight: 400 !important;
+  font-size: 18px !important;
 }
