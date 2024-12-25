@@ -40,7 +40,7 @@
                     <tr>
                         <td>{{ $role->name }}</td>
                         <td>{{ $role->slug }}</td>
-                        <td>{{ $role->created_at }}</td>
+                        <td>{{ $role->created_at->format('Y.m.d') }}</td>
                         <td>
 
                             @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('roles.edit'))

@@ -18,16 +18,6 @@
             <p class="title pt-3">Permissions</p>
 
             <div class="d-flex align-items-center ms-auto">
-                {{-- <form action="{{ route('permissions.index') }}" method="get" class="d-flex">
-                    <input type="text" name="search" class="form-control" placeholder="Search by role name"
-                        value="{{ request()->get('search') }}">
-                    <button type="submit" class="btn btn-dark ms-2">Filter</button>
-                </form>
-    
-                <form action="{{ route('permissions.index') }}" method="get">
-                    <button type="submit" class="btn btn-dark ms-2">Back</button>
-                </form> --}}
-
             @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.create'))
                 <a href="{{ route('permissions.create') }}" class=" br-11 new_roles btn btn-dark">Add New Permission</a>
             @endif
@@ -52,7 +42,7 @@
                     <tr>
                         <td>{{ $permission->name }}</td>
                         <td>{{ $permission->route }}</td>
-                        <td>{{ $permission->created_at }}</td>
+                        <td>{{ $permission->created_at->format('Y.m.d') }}</td>
                         <td>
                             @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permissions.edit'))
                                 <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-sm"

@@ -42,7 +42,7 @@
                     <tr>
                         <td>{{ $permissionGroup->name }}</td>
                         <td>{{ $permissionGroup->slug }}</td>
-                        <td>{{ $permissionGroup->created_at }}</td>
+                        <td>{{ $permissionGroup->created_at->format('Y.m.d') }}</td>
                         <td>
                             @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.edit'))
                             <a href="{{ route('permission-groups.edit', $permissionGroup->id) }}"
