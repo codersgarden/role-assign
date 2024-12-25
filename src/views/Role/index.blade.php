@@ -17,18 +17,7 @@
         <div class="d-flex justify-content-between align-items-center ms-5 me-5">
             <p class="title pt-3">Roles</p>
 
-            <!-- Right-aligned buttons and search form -->
             <div class="d-flex align-items-center ms-auto">
-                <form action="{{ route('roles.index') }}" method="get" class="d-flex">
-                    <input type="text" name="search" class="form-control" placeholder="Search by role name"
-                        value="{{ request()->get('search') }}">
-                    <button type="submit" class="btn btn-dark ms-2">Filter</button>
-                </form>
-
-                <form action="{{ route('roles.index') }}" method="get">
-                    <button type="submit" class="btn btn-dark ms-2">Back</button>
-                </form>
-
                 @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('roles.create'))
                     <a href="{{ route('roles.create') }}" class="br-11 new_roles btn btn-dark ms-3">Add New Role</a>
                 @endif

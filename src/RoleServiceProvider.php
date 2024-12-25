@@ -24,6 +24,7 @@ class RoleServiceProvider extends ServiceProvider
         $this->serveStaticFile('delete-icon', '/../resources/images/delete.png');
         $this->serveStaticFile('edit-icon', '/../resources/images/pencile.png');
         $this->serveStaticFile('roleassign-logo', '/../resources/images/LOGO.png');
+        $this->serveStaticFile('pervious-icon', '/../resources/images/Vector.png');
 
 
         $this->publishes([

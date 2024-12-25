@@ -12,20 +12,12 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
 
-        $search = $request->get('search'); 
-
-        $roles = Role::when($search, function ($query, $search) {
-            return $query->where('name', 'like', '%' . $search . '%');
-        })
-        ->orderBy('id', 'desc')
-        ->paginate(2);
-    
+        $roles = Role::orderBy('id', 'desc')->paginate(2);
         return view('roleassign::Role.index', ['roles' => $roles]);
     }
-
 
     public function create()
     {
