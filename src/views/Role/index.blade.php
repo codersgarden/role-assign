@@ -14,7 +14,7 @@
 
 @section('content')
     <div class="content bg-color">
-        <div class="d-flex justify-content-between align-items-center ms-5 me-5">
+        <div class="d-flex justify-content-between align-items-center ms-lg-5 me-lg-5 ms-md-0 me-md-0 ms-sm-0 me-sm-0">
             <p class="title pt-3">Roles</p>
 
             <div class="d-flex align-items-center ms-auto">
@@ -25,8 +25,8 @@
         </div>
     </div>
     <!-- Table -->
-    <div class="text-center">
-        <table class="table">
+
+        <table class="table text-center table-responsive">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -35,11 +35,12 @@
                     <th>Actions</th>
                 </tr>
             </thead>
+        
             <tbody>
                 @forelse ($roles as $role)
                     <tr>
-                        <td>{{ $role->name }}</td>
-                        <td>{{ $role->slug }}</td>
+                        <td data-label="Name">{{ $role->name }}</td>
+                        <td data-label="Slug">{{ $role->slug }}</td>
                         <td>{{ $role->created_at->format('Y.m.d') }}</td>
                         <td>
 
@@ -78,7 +79,7 @@
                 @endforelse
             </tbody>
         </table>
-    </div>
+  
 
     @include('roleassign::layouts.pagination', ['paginator' => $roles])
 @endsection

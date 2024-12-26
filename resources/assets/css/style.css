@@ -205,3 +205,86 @@ input::placeholder
   font-weight: 400 !important;
   font-size: 18px !important;
 }
+
+/* --------------------responsive------------ */
+
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+
+
+.header nav {
+  display: none; /* Initially hidden */
+  flex-direction: column;
+  position: absolute;
+  top: 60px; /* Adjust based on header height */
+  right: 10px;
+  background: #fff;
+  width: 200px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  border-radius: 5px;
+}
+.header nav {
+  display: none; /* Initially hidden */
+  flex-direction: column;
+  position: absolute;
+  top: 60px; /* Adjust based on header height */
+  right: 10px;
+  background: #fff;
+  width: 200px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  border-radius: 5px;
+}
+
+.header nav.active {
+  display: flex; /* Show menu when active */
+    margin-top: 21px;
+    text-align: center;
+    width: 100%;
+    
+}
+
+.header .menu-toggle {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Icon for cross button */
+.header .menu-toggle.cross {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  content: '✖';
+}
+
+
+/* Responsive Behavior */
+@media (min-width: 768px) {
+  .header nav {
+    display: flex !important;
+    position: static;
+    flex-direction: row;
+    box-shadow: none;
+    width: auto;
+  }
+  .header .menu-toggle {
+    display: none; /* Hide toggle button on large screens */
+  }
+
+  .back-icon {
+    display: none !important; /* Use !important if other styles are overriding it */
+  }
+}

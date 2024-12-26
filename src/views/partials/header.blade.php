@@ -16,8 +16,10 @@
         </a>
     </div>
 
+     <button class="menu-toggle ps-md-5 ms-md-5" onclick="toggleMenu()">☰</button>
+
     <!-- Navigation Links -->
-    <nav class="col-lg-7 d-flex align-items-center justify-content-start">
+    <nav class="col-lg-7 col-md-12 col-sm-12 ">
         <a class="nav-link {{ request()->routeIs('roles.*') ? 'active' : '' }}"
             href="{{ route('roles.index') }}">Roles</a>
         <a class="nav-link ms-5 {{ request()->routeIs('permissions.*') ? 'active' : '' }}"
@@ -31,3 +33,24 @@
         <img src="{{ url('setting-icon') }}" alt="Settings">
     </div>
 </header>
+
+
+
+<script>
+
+    function toggleMenu() {
+      const nav = document.querySelector('.header nav');
+      const toggleButton = document.querySelector('.menu-toggle');
+    
+      // Toggle the "active" class on the menu
+      nav.classList.toggle('active');
+    
+      // Change the button icon between ☰ and ✖
+      if (nav.classList.contains('active')) {
+        toggleButton.textContent = '✖'; // Show cross icon
+      } else {
+        toggleButton.textContent = '☰'; // Show menu icon
+      }
+    }
+    
+    </script>

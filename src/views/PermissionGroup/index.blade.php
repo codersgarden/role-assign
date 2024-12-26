@@ -14,44 +14,43 @@
 @extends('roleassign::layouts.app')
 
 @section('content')
-
     <div class="content bg-color">
-        <div class="d-flex justify-content-between align-items-center ms-5 me-5">
+        <div class="d-flex justify-content-between align-items-center ms-lg-5 me-lg-5 ms-md-0 me-md-0 ms-sm-0 me-sm-0">
             <p class="title pt-3">Permission Group</p>
 
             <div class="d-flex align-items-center ms-auto">
-            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.create'))
-            <a href="{{ route('permission-groups.create') }}" class=" br-11 new_roles btn btn-dark">Add New Permission
-                Group</a>
-            @endif
-        </div>
+                @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.create'))
+                    <a href="{{ route('permission-groups.create') }}" class=" br-11 new_roles btn btn-dark">Add New Permission
+                        Group</a>
+                @endif
+            </div>
         </div>
     </div>
-    <div class="text-center">
-        <table class="table">
-            <thead>
+
+    <table class="table  text-center table-responsive">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Slug</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($permissionGroups as $permissionGroup)
                 <tr>
-                    <th>Name</th>
-                    <th>Slug</th>
-                    <th>Date</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($permissionGroups as $permissionGroup)
-                    <tr>
-                        <td>{{ $permissionGroup->name }}</td>
-                        <td>{{ $permissionGroup->slug }}</td>
-                        <td>{{ $permissionGroup->created_at->format('Y.m.d') }}</td>
-                        <td>
-                            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.edit'))
-                            <a href="{{ route('permission-groups.edit', $permissionGroup->id) }}"
-                                class="btn btn-sm" id="edit-permission-group">
+                    <td>{{ $permissionGroup->name }}</td>
+                    <td>{{ $permissionGroup->slug }}</td>
+                    <td>{{ $permissionGroup->created_at }}</td>
+                    <td>
+                        @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.edit'))
+                            <a href="{{ route('permission-groups.edit', $permissionGroup->id) }}" class="btn btn-sm"
+                                id="edit-permission-group">
                                 <img src="{{ url('edit-icon') }}" alt="Logo">
                             </a>
-                            @endif
+                        @endif
 
-                            @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.destroy'))
+                        @if (in_array(Auth::user()->email, $aclEmails) || checkPermission('permission-groups.destroy'))
                             <form action="{{ route('permission-groups.destroy', $permissionGroup->id) }}" method="post"
                                 class="d-inline delete-role-form">
                                 @csrf
@@ -62,16 +61,16 @@
                                 </button>
                             </form>
                         @endif
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="4" class="text-center">No permission groups found.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="4" class="text-center">No permission groups found.</td>
+                </tr>
+            @endforelse
+        </tbody>
+    </table>
+
 
     @include('roleassign::layouts.pagination', ['paginator' => $permissionGroups])
 @endsection
