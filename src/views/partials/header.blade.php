@@ -29,7 +29,7 @@
     </nav>
 
     <!-- Settings Icon -->
-    <div class="col-lg-2 d-flex justify-content-end pe-5">
+    <div class="col-lg-2 d-flex justify-content-end mx-auto">
         <img src="{{ url('setting-icon') }}" alt="Settings">
     </div>
 </header>
