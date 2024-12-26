@@ -16,7 +16,7 @@
             
             <!-- Centered form -->
             <div class="container mt-5">
-                <form action="{{ route('roles.store') }}" method="post" class="w-50 mx-auto p-4 rounded">
+                <form action="{{ route('roles.store') }}" method="post" class="w-50 mx-auto rounded">
                     @csrf
                     <div class="mb-3">
                         <label for="role" class="form-label">Role</label>

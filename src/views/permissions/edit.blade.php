@@ -16,7 +16,7 @@
     </div>
 
     <div class="container mt-5">
-        <form action="{{ route('permissions.update', $permission->id) }}" method="post" class="w-50 mx-auto p-4 rounded">
+        <form action="{{ route('permissions.update', $permission->id) }}" method="post" class="w-50 mx-auto rounded">
             @csrf
 
             <div class="mb-3">
